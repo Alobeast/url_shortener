@@ -1,10 +1,12 @@
 <%= tag.div id: dom_id(link) do %>
+  <%= turbo_stream_from link %>
   <div class="grid grid-cols-8 items-center py-4">
     <div class="col-span-5">
       <%= link_to view_path(link), target: :_blank, data: {turbo: false},
       class:"no-underline" do %>
-        <%= favicon_image_tag link.domain, class: "inline-block" %>
-        <%= link.url %>
+        <%= favicon_image_tag link.domain, class: "inline-block m-0" %>
+        <%= link.title || link.url %>
+        <%= tag.div link.description, class: "text-xs text-gray-700" %>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
         stroke-width="1.5" stroke="currentColor" class="inline-block w-4 h-4">
           <path stroke-linecap="round" stroke-linejoin="round"
