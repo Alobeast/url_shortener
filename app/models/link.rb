@@ -9,8 +9,8 @@ class Link < ApplicationRecord
     MetadataJob.perform_async(to_param)
   end
 
-  def self.find(id)
-    super Base62.decode(id)
+  def self.find_by_base62_code(code)
+    find(Base62.decode(code))
   end
 
   def to_param
