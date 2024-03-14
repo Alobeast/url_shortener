@@ -1,0 +1,27 @@
+name: Tests
+
+on:
+  pull_request:
+    branches:
+      - "*"
+  push:
+    branches:
+      - "master"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: Run tests
+        env:
+          RAILS_ENV: test
+        run: |
+          bin/rails test:prepare
+          bin/rails db:test:prepare
+          bin/rails test
